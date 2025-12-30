@@ -23,6 +23,7 @@
       "@/store/*": ["src/app/store/*"],
       "@/features/*": ["src/app/features/*"],
       "@/shared/*": ["src/app/shared/*"], 
+      "@/common": ["src/app/common/index.ts"],
     }
   },
   "angularCompilerOptions": {
