@@ -1,0 +1,9 @@
+import { RouteConfig } from '../utils';
+
+export class FeaturesRoutes {
+  //////////////////////////////////////////////////////////
+  // Auth
+  //////////////////////////////////////////////////////////
+  static Auth = new RouteConfig('auth');
+  static Login = new RouteConfig('login', FeaturesRoutes.Auth);
+}
