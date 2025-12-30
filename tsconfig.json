@@ -24,6 +24,7 @@
        "@/shared/*": ["src/app/shared/*"], 
        "@/common": ["src/app/common/index.ts"],
        "@/core/api": ["src/app/core/api/index.ts"],
+       "@/store": ["src/app/store/index.ts"],
     }
   },
   "angularCompilerOptions": {

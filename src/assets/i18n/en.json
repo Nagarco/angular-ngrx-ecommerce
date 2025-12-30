@@ -17,5 +17,10 @@
       "FORM.PASSWORD.PLACEHOLDER": "Enter your password",
       "FORM.SUBMIT": "Login"
     }
+  },
+  "LANDING": {
+    "TITLE": "Welcome",
+    "WELCOME": "You have successfully logged in!",
+    "LOGOUT": "Logout"
   }
 }

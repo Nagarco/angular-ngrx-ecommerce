@@ -4,7 +4,7 @@
       <mat-card-title>{{ 'AUTH.LOGIN.TITLE' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form class="form" [formGroup]="form">
+      <form class="form" [formGroup]="form" (ngSubmit)="submit()">
         <app-text-field
           class="form__field"
           formControlName="username"
@@ -23,6 +23,7 @@
           color="primary"
           class="btn w-100"
           type="submit"
+          [disabled]="isLoading$ | async"
         >
           {{ 'AUTH.LOGIN.FORM.SUBMIT' | translate }}
         </button>
