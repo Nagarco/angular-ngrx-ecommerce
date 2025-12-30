@@ -1,0 +1,5 @@
+@for(error of errorMessages(); track error.key) {
+<mat-error>{{
+  "FORM_ERRORS." + error.key | translate : error.params
+}}</mat-error>
+}
