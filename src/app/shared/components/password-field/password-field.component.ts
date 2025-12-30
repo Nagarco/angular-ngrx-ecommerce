@@ -20,7 +20,7 @@ import { MatIcon } from '@angular/material/icon';
   ],
 })
 export class PasswordFieldComponent {
-  passwordFormControlName = input.required<string>();
+  passwordFormControlName = input<string>();
   label = input<string>('');
   placeholder = input<string>('');
   showPassword = signal<boolean>(false);

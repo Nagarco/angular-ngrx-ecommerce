@@ -1,0 +1,27 @@
+.layout {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  min-width: 500px;
+
+  @media (width < 576px) {
+    min-width: 90%;
+  }
+}
+
+.card__header {
+  margin-bottom: 1rem;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.form__field {
+  display: block;
+  margin-bottom: 0.4rem;
+}

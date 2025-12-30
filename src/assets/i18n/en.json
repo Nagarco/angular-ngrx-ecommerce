@@ -7,5 +7,15 @@
     "min": "Minimum value is {{min}}",
     "max": "Maximum value is {{max}}",
     "default": "Invalid value"
+  },
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "Sign In",
+      "FORM.EMAIL.LABEL": "Email",
+      "FORM.EMAIL.PLACEHOLDER": "Enter your email",
+      "FORM.PASSWORD.LABEL": "Password",
+      "FORM.PASSWORD.PLACEHOLDER": "Enter your password",
+      "FORM.SUBMIT": "Login"
+    }
   }
 }

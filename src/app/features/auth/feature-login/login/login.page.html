@@ -1,0 +1,32 @@
+<div class="layout">
+  <mat-card class="card">
+    <mat-card-header class="card__header">
+      <mat-card-title>{{ 'AUTH.LOGIN.TITLE' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="form" [formGroup]="form">
+        <app-text-field
+          class="form__field"
+          formControlName="email"
+          [label]="'AUTH.LOGIN.FORM.EMAIL.LABEL' | translate"
+          [placeholder]="'AUTH.LOGIN.FORM.EMAIL.PLACEHOLDER' | translate"
+          type="email"
+        />
+        <app-password-field
+          class="form__field"
+          passwordFormControlName="password"
+          [label]="'AUTH.LOGIN.FORM.PASSWORD.LABEL' | translate"
+          [placeholder]="'AUTH.LOGIN.FORM.PASSWORD.PLACEHOLDER' | translate"
+        />
+        <button
+          mat-raised-button
+          color="primary"
+          class="btn w-100"
+          type="submit"
+        >
+          {{ 'AUTH.LOGIN.FORM.SUBMIT' | translate }}
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
