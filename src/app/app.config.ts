@@ -11,7 +11,8 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AuthInterceptor } from '@/core/api';
+import { API_BASE_URL, AuthInterceptor } from '@/core/api';
+import { environment } from '../enviornments/enviornment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,5 +30,6 @@ export const appConfig: ApplicationConfig = {
       lang: 'en',
       fallbackLang: 'en',
     }),
+    {provide: API_BASE_URL, useValue: environment.baseUrl},
   ],
 };

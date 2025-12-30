@@ -1,6 +1,9 @@
 import { HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthEndPoints } from '../endpoints';
+import { InjectionToken } from '@angular/core';
+
+export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
 const PUBLIC_URLS = [AuthEndPoints.Login.url()];
 
