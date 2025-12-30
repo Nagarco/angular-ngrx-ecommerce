@@ -9,21 +9,8 @@ import { API_BASE_URL } from '../interceptors';
 import { catchError, map, throwError } from 'rxjs';
 
 export interface HttpOptions<V> {
-  headers?:
-    | HttpHeaders
-    | {
-        [header: string]: string | string[];
-      };
-  observe?: 'body';
-  params?:
-    | HttpParams
-    | {
-        [param: string]:
-          | string
-          | number
-          | boolean
-          | ReadonlyArray<string | number | boolean>;
-      };
+  headers?: HttpHeaders
+  params?:  HttpParams
   responseType?: 'json';
 }
 
