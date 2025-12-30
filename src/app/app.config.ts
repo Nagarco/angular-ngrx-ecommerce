@@ -13,15 +13,14 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { API_BASE_URL, AuthInterceptor } from '@/core/api';
 import { environment } from '../enviornments/enviornment';
-import { appReducers } from './store';
-import { AuthEffects } from './store/auth';
+import { appReducers, appEffects } from './store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideStore(appReducers),
-    provideEffects([AuthEffects]),
+    provideEffects(appEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideHttpClient(withInterceptors([AuthInterceptor])),
     provideTranslateService({

@@ -9,4 +9,4 @@ export const appReducers: ActionReducerMap<AppState> = {
   auth: authReducer,
 };
 
-export * from './auth';
+export * from './app.effects';
