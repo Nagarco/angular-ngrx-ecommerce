@@ -31,7 +31,7 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class LoginPage {
   form = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
 }

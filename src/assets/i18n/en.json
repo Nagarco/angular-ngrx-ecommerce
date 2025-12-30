@@ -11,8 +11,8 @@
   "AUTH": {
     "LOGIN": {
       "TITLE": "Sign In",
-      "FORM.EMAIL.LABEL": "Email",
-      "FORM.EMAIL.PLACEHOLDER": "Enter your email",
+      "FORM.USERNAME.LABEL": "Username",
+      "FORM.USERNAME.PLACEHOLDER": "Enter your username",
       "FORM.PASSWORD.LABEL": "Password",
       "FORM.PASSWORD.PLACEHOLDER": "Enter your password",
       "FORM.SUBMIT": "Login"
