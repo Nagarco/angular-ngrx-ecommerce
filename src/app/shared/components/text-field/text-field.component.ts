@@ -17,7 +17,7 @@ import {
   NgControl,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { FormErrorsComponent } from '../form-errors/form-errors.component';
+import { FieldErrorsComponent } from '../field-errors/field-errors.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
@@ -30,7 +30,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
-    FormErrorsComponent,
+    FieldErrorsComponent,
   ],
   templateUrl: './text-field.component.html',
   styleUrl: './text-field.component.scss',
@@ -48,10 +48,13 @@ export class TextFieldComponent implements OnInit, ControlValueAccessor {
     input: new FormControl(),
   });
   formControl!: AbstractControl;
+  controlName!: string;
   onChanged!: (value: string) => {};
   onTouched!: () => {};
   placeholder = input<string>('');
   label = input<string>('');
+  type = input<string>('text');
+  required = input<boolean>(false);
 
   get input(): AbstractControl {
     return this.form.get('input')!;
@@ -94,7 +97,7 @@ export class TextFieldComponent implements OnInit, ControlValueAccessor {
     const ngControl: NgControl = this.injector.get(NgControl);
     const formDirective: FormGroupDirective =
       this.injector.get(FormGroupDirective);
-    const controlName = ngControl.name as string;
-    this.formControl = formDirective.form.controls[controlName];
+    this.controlName = ngControl.name as string;
+    this.formControl = formDirective.form.controls[this.controlName];
   }
 }

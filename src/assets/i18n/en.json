@@ -1,6 +1,6 @@
 {
   "FORM_ERRORS": {
-    "required": "This field is required",
+    "required": "{{field}} is required",
     "email": "Please enter a valid email address",
     "minlength": "Minimum length is {{requiredLength}} characters",
     "maxlength": "Maximum length is {{requiredLength}} characters",

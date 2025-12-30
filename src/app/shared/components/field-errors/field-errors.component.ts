@@ -10,20 +10,25 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-form-errors',
+  selector: 'app-field-errors',
   imports: [CommonModule, TranslateModule, MatInputModule],
-  templateUrl: './form-errors.component.html',
-  styleUrl: './form-errors.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './field-errors.component.html',
+  styleUrl: './field-errors.component.scss',
 })
-export class FormErrorsComponent {
+export class FieldErrorsComponent {
+  controlName = input.required<string>();
   errors = input.required<ValidationErrors | null>();
   errorMessages = computed(() => {
     const errors = this.errors();
     if (!errors) return [];
-    return Object.keys(errors).map((key) => ({
-      key,
-      params: errors[key],
-    }));
+    return Object.keys(errors).map((key) => {
+      return {
+        key,
+        params: {
+          ...errors[key],
+          field: this.controlName(),
+        },
+      };
+    });
   });
 }
