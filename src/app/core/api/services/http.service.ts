@@ -23,28 +23,24 @@ export class HttpService {
 
   get<T>(url: string, options?: HttpOptions<T>) {
     return this.httpClient.get<T>(this.getUrl(url), options).pipe(
-      map((data: unknown) => (data as { data: T }).data),
       catchError((err) => throwError(this.handleError(err)))
     );
   }
 
   post<T>(url: string, body: unknown, options?: HttpOptions<T>) {
     return this.httpClient.post<T>(this.getUrl(url), body, options).pipe(
-      map((data: unknown) => (data as { data: T }).data),
       catchError((err) => throwError(this.handleError(err)))
     );
   }
 
   put<T>(url: string, body: unknown, options?: HttpOptions<T>) {
     return this.httpClient.put<T>(this.getUrl(url), body, options).pipe(
-      map((data: unknown) => (data as { data: T }).data),
       catchError((err) => throwError(this.handleError(err)))
     );
   }
 
   delete<T>(url: string, options?: HttpOptions<T> & { body?: unknown }) {
     return this.httpClient.delete<T>(this.getUrl(url), options).pipe(
-      map((data: unknown) => (data as { data: T }).data),
       catchError((err) => throwError(this.handleError(err)))
     );
   }

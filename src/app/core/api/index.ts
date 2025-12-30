@@ -1,3 +1,3 @@
-export * from '../../common/endpoints';
+export * from '../endpoints';
 export * from './interceptors';
 export * from './services';
