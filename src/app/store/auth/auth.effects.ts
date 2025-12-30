@@ -20,11 +20,7 @@ export class AuthEffects {
         this.authService.login({ username, password }).pipe(
           map((token) => AuthActions.loginSuccess({ token })),
           catchError((error: any) =>
-            of(
-              AuthActions.loginFailure({
-                error: error?.message || 'Login failed. Please try again.',
-              })
-            )
+            of(AuthActions.loginFailure({ error: error?.message || 'Login failed. Please try again.'}))
           )
         )
       )
@@ -32,39 +28,26 @@ export class AuthEffects {
   );
 
   loginSuccess$ = createEffect(
-    () => this.actions$.pipe(
+    () =>
+      this.actions$.pipe(
         ofType(AuthActions.loginSuccess),
-        tap(({ token }) => {
-          if (token) {
-            localStorage.setItem('authToken', token);
-          }
-          this.router.navigate([FeaturesRoutes.Landing.url()]);
-        })
+        tap(() => this.router.navigate([FeaturesRoutes.Landing.url()])),
+        map(({ token }) => AuthActions.setToken({ token })),
       ),
-    { dispatch: false }
   );
 
-  logout$ = createEffect(
-    () => this.actions$.pipe(
-        ofType(AuthActions.logout),
-        tap(() => {
-          this.router.navigate([FeaturesRoutes.Login.url()]);
-        }),
-        map(() => AuthActions.logoutSuccess())
-      )
-  );
-
-  initAuth$ = createEffect(() =>
+  logout$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.initAuth),
-      map(() => {
-        const token = localStorage.getItem('authToken');
-        if (token) {
-          return AuthActions.setToken({ token });
-        }
-        return AuthActions.clearToken();
-      })
+      ofType(AuthActions.logout),
+      tap(() => this.router.navigate([FeaturesRoutes.Login.url()])),
+      map(() => AuthActions.logoutSuccess())
+    )
+  );
+
+  logoutSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.logoutSuccess),
+      map(() => AuthActions.clearToken())
     )
   );
 }
-
