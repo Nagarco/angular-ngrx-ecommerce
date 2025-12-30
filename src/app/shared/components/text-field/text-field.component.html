@@ -4,19 +4,16 @@
     <input
       matInput
       [type]="type()"
-      [required]="required()"
-      formControlName="input"
+      [formControl]="formControl"
       [placeholder]="placeholder()"
       (focus)="handleTouched($event)"
       (input)="handleInput($event)"
     />
     <div matSuffix><ng-content select="[icon]"></ng-content></div>
-    @if (formControl && formControl.invalid && (formControl.dirty ||
-    formControl.touched)) {
-    <app-field-errors
-      [controlName]="controlName"
-      [errors]="formControl.errors"
-    ></app-field-errors>
+    @if(formControl.invalid) {
+    <mat-error>{{
+      "FORM_ERRORS." + errorMessage()?.key | translate : errorMessage()?.params
+    }}</mat-error>
     }
   </mat-form-field>
 </ng-container>

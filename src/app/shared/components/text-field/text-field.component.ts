@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
+  DestroyRef,
   forwardRef,
   inject,
   Injector,
   input,
   OnInit,
+  signal,
 } from '@angular/core';
 import {
-  AbstractControl,
   ControlValueAccessor,
   FormControl,
   FormGroup,
@@ -16,11 +17,15 @@ import {
   NG_VALUE_ACCESSOR,
   NgControl,
   ReactiveFormsModule,
+  ValidationErrors,
 } from '@angular/forms';
-import { FieldErrorsComponent } from '../field-errors/field-errors.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
+import { merge } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-text-field',
@@ -30,7 +35,8 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
-    FieldErrorsComponent,
+    MatIconModule,
+    MatButtonModule,
   ],
   templateUrl: './text-field.component.html',
   styleUrl: './text-field.component.scss',
@@ -44,24 +50,45 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class TextFieldComponent implements OnInit, ControlValueAccessor {
   private injector = inject(Injector);
+  private destroyRef = inject(DestroyRef);
   form: FormGroup = new FormGroup({
     input: new FormControl(),
   });
-  formControl!: AbstractControl;
+  formControl!: FormControl;
   controlName!: string;
-  onChanged!: (value: string) => {};
-  onTouched!: () => {};
   placeholder = input<string>('');
   label = input<string>('');
   type = input<string>('text');
-  required = input<boolean>(false);
+  errorMessage = signal<any>({ key: null, params: null });
+  onChanged: (value: string) => void = () => {};
+  onTouched: () => void = () => {};
 
-  get input(): AbstractControl {
-    return this.form.get('input')!;
+  get input(): FormControl {
+    return this.form.get('input') as FormControl;
   }
 
   ngOnInit(): void {
     this.getFormControl();
+    merge(this.formControl?.statusChanges, this.formControl?.valueChanges)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.updateErrorMessage());
+  }
+
+  updateErrorMessage() {
+    const errors: ValidationErrors | null = this.formControl?.errors;
+    if (!errors) {
+      this.errorMessage.set({ key: null, params: null });
+      return;
+    }
+    const firstErrorKey = Object.keys(errors)[0];
+    if (!firstErrorKey) return;
+    this.errorMessage.set({
+      key: firstErrorKey,
+      params: {
+        ...errors[firstErrorKey],
+        field: this.controlName,
+      },
+    });
   }
 
   handleInput(event: Event): void {
@@ -98,6 +125,8 @@ export class TextFieldComponent implements OnInit, ControlValueAccessor {
     const formDirective: FormGroupDirective =
       this.injector.get(FormGroupDirective);
     this.controlName = ngControl.name as string;
-    this.formControl = formDirective.form.controls[this.controlName];
+    this.formControl = formDirective.form.controls[
+      this.controlName
+    ] as FormControl;
   }
 }
