@@ -1,25 +1,24 @@
 <mat-card>
-  <div class="item" [attr.aria-label]="'Product: ' + product().name">
+  <div class="item" [attr.aria-label]="'Product: ' + product().productName">
     <div class="item__avatar">
       @if (product().imageUrl) {
       <img
         [src]="product().imageUrl"
-        [alt]="product().name + ' product image'"
+        [alt]="product().productName + ' product image'"
       />
       } @else {
       <div
         class="placeholder"
-        [attr.aria-label]="'Placeholder image for ' + product().name"
+        [attr.aria-label]="'Placeholder image for ' + product().productName"
         role="img"
       ></div>
       }
     </div>
 
     <div class="item__details">
-      <h3 class="item__title">{{ product().name }}</h3>
+      <h3 class="item__title">{{ product().productName }}</h3>
       <p class="item__meta">
-        <span>Brand: {{ product().brand }}</span> &nbsp;
-        <span>Category: {{ product().category }}</span>
+        <span>Brand: {{ product().brandName }}</span>
       </p>
       <p class="item__value">${{ product().price.toFixed(2) }}</p>
     </div>
@@ -29,7 +28,7 @@
         mat-raised-button
         class="btn"
         color="primary"
-        [attr.aria-label]="'Add ' + product().name + ' to cart'"
+        [attr.aria-label]="'Add ' + product().productName + ' to cart'"
         (click)="onAddToCart()"
       >
         Add to Cart

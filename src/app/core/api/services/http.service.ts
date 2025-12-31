@@ -9,8 +9,8 @@ import { API_BASE_URL } from '../interceptors';
 import { catchError, map, throwError } from 'rxjs';
 
 export interface HttpOptions<V> {
-  headers?: HttpHeaders
-  params?:  HttpParams
+  headers?: HttpHeaders;
+  params?: HttpParams;
   responseType?: 'json';
 }
 
@@ -22,27 +22,46 @@ export class HttpService {
   private httpClient = inject(HttpClient);
 
   get<T>(url: string, options?: HttpOptions<T>) {
-    return this.httpClient.get<T>(this.getUrl(url), options).pipe(
-      catchError((err) => throwError(this.handleError(err)))
-    );
+    return this.httpClient
+      .get<T>(this.getUrl(url), options)
+      .pipe(catchError((err) => throwError(this.handleError(err))));
   }
 
   post<T>(url: string, body: unknown, options?: HttpOptions<T>) {
-    return this.httpClient.post<T>(this.getUrl(url), body, options).pipe(
-      catchError((err) => throwError(this.handleError(err)))
-    );
+    return this.httpClient
+      .post<T>(this.getUrl(url), body, options)
+      .pipe(catchError((err) => throwError(this.handleError(err))));
   }
 
   put<T>(url: string, body: unknown, options?: HttpOptions<T>) {
-    return this.httpClient.put<T>(this.getUrl(url), body, options).pipe(
-      catchError((err) => throwError(this.handleError(err)))
-    );
+    return this.httpClient
+      .put<T>(this.getUrl(url), body, options)
+      .pipe(catchError((err) => throwError(this.handleError(err))));
   }
 
   delete<T>(url: string, options?: HttpOptions<T> & { body?: unknown }) {
-    return this.httpClient.delete<T>(this.getUrl(url), options).pipe(
-      catchError((err) => throwError(this.handleError(err)))
-    );
+    return this.httpClient
+      .delete<T>(this.getUrl(url), options)
+      .pipe(catchError((err) => throwError(this.handleError(err))));
+  }
+
+  setQueryParams(queries: Record<string, any>): HttpParams {
+    let queryParams = new HttpParams();
+    for (const query in queries) {
+      if (queries.hasOwnProperty(query)) {
+        const value = queries[query];
+        if (value != null) {
+          if (Array.isArray(value)) {
+            value.forEach((item) => {
+              queryParams = queryParams.append(query, String(item));
+            });
+          } else {
+            queryParams = queryParams.append(query, String(value));
+          }
+        }
+      }
+    }
+    return queryParams;
   }
 
   private getUrl(endpoint: string): string {
