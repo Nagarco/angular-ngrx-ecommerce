@@ -10,7 +10,7 @@ export const routes: Routes = [
       import('./features/auth/routes').then((m) => m.AUTH_ROUTES),
   },
   {
-    path: FeaturesRoutes.Landing.path,
+    path: '',
     canActivate: [authGuard],
     loadChildren: () =>
       import('./features/landing/routes').then((m) => m.LANDING_ROUTES),

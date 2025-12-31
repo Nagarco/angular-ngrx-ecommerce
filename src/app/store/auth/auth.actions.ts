@@ -27,3 +27,5 @@ export const setToken = createAction(
 export const clearToken = createAction('[Auth] Clear Token');
 
 export const clearError = createAction('[Auth] Clear Error');
+
+export const initAuth = createAction('[Auth] Init Auth');

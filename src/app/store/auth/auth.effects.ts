@@ -31,9 +31,14 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.loginSuccess),
-        tap(() => this.router.navigate([FeaturesRoutes.Landing.url()])),
-        map(({ token }) => AuthActions.setToken({ token })),
-      ),
+        tap(({ token }) => {
+          if (token) {
+            localStorage.setItem('authToken', token);
+          }
+          this.router.navigate([FeaturesRoutes.Landing.url()]);
+        }),
+        map(({ token }) => AuthActions.setToken({ token }))
+      )
   );
 
   logout$ = createEffect(() =>
@@ -47,7 +52,21 @@ export class AuthEffects {
   logoutSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.logoutSuccess),
+      tap(() => localStorage.removeItem('authToken')),
       map(() => AuthActions.clearToken())
+    )
+  );
+
+  initAuth$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.initAuth),
+      map(() => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+          return AuthActions.setToken({ token });
+        }
+        return AuthActions.clearToken();
+      })
     )
   );
 }
