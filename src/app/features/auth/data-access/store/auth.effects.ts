@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import * as AuthActions from './auth.actions';
 import { AuthService } from '../services';
-import { FeaturesRoutes } from '@/common';
+import { FeaturesRoutes, LocalStorage, StorageKeys } from '@/common';
 
 @Injectable()
 export class AuthEffects {
@@ -33,7 +33,7 @@ export class AuthEffects {
         ofType(AuthActions.loginSuccess),
         tap(({ token }) => {
           if (token) {
-            localStorage.setItem('authToken', token);
+            LocalStorage.set(StorageKeys.AuthToken, token);
           }
           this.router.navigate([FeaturesRoutes.Landing.url()]);
         }),
@@ -52,7 +52,7 @@ export class AuthEffects {
   logoutSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.logoutSuccess),
-      tap(() => localStorage.removeItem('authToken')),
+      tap(() => LocalStorage.remove(StorageKeys.AuthToken)),
       map(() => AuthActions.clearToken())
     )
   );
@@ -61,7 +61,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.initAuth),
       map(() => {
-        const token = localStorage.getItem('authToken');
+        const token: string | null = LocalStorage.get(StorageKeys.AuthToken);
         if (token) {
           return AuthActions.setToken({ token });
         }
