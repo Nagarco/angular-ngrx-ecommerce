@@ -3,12 +3,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
+import { CartComponent } from '../cart-icon/cart.component';
 import { Store } from '@ngrx/store';
 import * as AuthActions from '@/store/auth';
 
 @Component({
   selector: 'app-navbar',
-  imports: [MatToolbarModule, CommonModule, BreadcrumbComponent, DropdownComponent],
+  imports: [MatToolbarModule, CommonModule, BreadcrumbComponent, DropdownComponent, CartComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -12,6 +12,12 @@ nav {
   width: 100%;
 }
 
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .navbar__menu {
   margin: 0;
   padding: 0;
