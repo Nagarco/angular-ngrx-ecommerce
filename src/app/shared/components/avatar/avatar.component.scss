@@ -1,0 +1,61 @@
+:host.avatar {
+  --avatar-size: 2rem;
+  width: var(--avatar-size);
+  min-width: var(--avatar-size);
+  height: var(--avatar-size);
+  display: inline-block;
+
+  .avatar__container {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  &--circle {
+    border-radius: 50%;
+
+    .avatar__container {
+      border-radius: 50%;
+    }
+  }
+
+  &--square {
+    border-radius: 0.5rem;
+
+    .avatar__container {
+      border-radius: 0.5rem;
+    }
+  }
+
+  &--sm {
+    --avatar-size: 1.5rem;
+  }
+
+  &--lg {
+    --avatar-size: 3rem;
+  }
+
+  &--xl {
+    --avatar-size: 4rem;
+  }
+
+  &--xxl {
+    --avatar-size: 5rem;
+  }
+}
+
+.avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+:host.avatar--width .avatar__image {
+  width: 100%;
+  height: auto;
+}
+
+:host.avatar--height .avatar__image {
+  width: auto;
+  height: 100%;
+}

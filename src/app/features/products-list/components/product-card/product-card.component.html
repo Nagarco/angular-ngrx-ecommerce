@@ -2,10 +2,7 @@
   <div class="item" [attr.aria-label]="'Product: ' + product().productName">
     <div class="item__avatar">
       @if (product().imageUrl) {
-      <img
-        [src]="product().imageUrl"
-        [alt]="product().productName + ' product image'"
-      />
+      <lib-avatar [imageUrl]="product().imageUrl" [size]="'xxl'" [shape]="'square'" />
       } @else {
       <div
         class="placeholder"
@@ -36,5 +33,4 @@
     </div>
   </div>
 </mat-card>
-
 

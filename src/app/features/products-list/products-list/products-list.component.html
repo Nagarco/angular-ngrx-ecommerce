@@ -1,5 +1,5 @@
 @for (product of products$ | async; track product.id) {
-<app-product [product]="product"></app-product>
+<app-product-card [product]="product"></app-product-card>
 }
 <mat-paginator
   [length]="(total$ | async) ?? 0"
