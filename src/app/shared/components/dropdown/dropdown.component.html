@@ -1,0 +1,5 @@
+<mat-select [placeholder]="label() | translate" (selectionChange)="onSelectionChange($event)">
+  @for (option of options(); track option.value) {
+    <mat-option [value]="option.value">{{option.label | translate}}</mat-option>
+  }
+</mat-select>

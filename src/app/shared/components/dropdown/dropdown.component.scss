@@ -1,0 +1,8 @@
+.mat-mdc-select {
+  min-width: 7rem;
+}
+
+:host ::ng-deep .mat-mdc-select-trigger {
+    min-height: 2.25rem;
+    padding: 0 .5rem
+}

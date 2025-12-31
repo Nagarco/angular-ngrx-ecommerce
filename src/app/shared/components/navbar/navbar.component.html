@@ -1,5 +1,11 @@
 <mat-toolbar>
-  <nav aria-label="breadcrumb">
+  <nav aria-label="breadcrumb" class="navbar">
     <app-breadcrumb></app-breadcrumb>
+    <app-dropdown 
+      class="navbar__menu"
+      [label]="'User'" 
+      [options]="navbarOptions"
+      (selectionChange)="onDropdownChange($event)">
+    </app-dropdown>
   </nav>
 </mat-toolbar>

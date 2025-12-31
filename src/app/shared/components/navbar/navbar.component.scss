@@ -1,4 +1,4 @@
-mat-toolbar {
+.mat-toolbar {
   display: flex;
   align-items: center;
   padding: 0 1rem;
@@ -6,6 +6,16 @@ mat-toolbar {
 }
 
 nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
 }
 
+.navbar__menu {
+  margin: 0;
+  padding: 0;
+  display: block;
+  background: #e2daff; //TODO:- to be changed to a variable
+  border-radius: .5rem;
+}
