@@ -1,16 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProductsListComponent } from '@/features/products-list';
 
 @Component({
   selector: 'app-landing',
-  standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [TranslateModule, ProductsListComponent],
   templateUrl: './landing.page.html',
   styleUrl: './landing.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LandingPage {
-
 }
 
