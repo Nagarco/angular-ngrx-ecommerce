@@ -24,25 +24,12 @@ export class BreadcrumbComponent implements OnInit {
   private getCurrentPageName(): string {
     let route = this.activatedRoute;
 
+    while (route.firstChild) {
+      route = route.firstChild;
+    }
+
     const breadcrumb = route.snapshot.data['breadcrumb'];
-    if (breadcrumb) {
-      return breadcrumb;
-    }
-
-    const urlSegments = route.snapshot.url;
-    if (urlSegments.length > 0) {
-      const lastSegment = urlSegments[urlSegments.length - 1].path;
-      return this.formatLabel(lastSegment);
-    }
-
-    return '';
-  }
-
-  private formatLabel(path: string): string {
-    return path
-      .split('-')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+    return breadcrumb || '';
   }
 
   private subscribeToRouteChanges(): void {
