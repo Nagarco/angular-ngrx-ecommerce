@@ -42,3 +42,7 @@ export const selectHasMore = createSelector(
   }
 );
 
+export const selectPageSize = createSelector(
+  selectProductsListState,
+  (state: ProductsListState) => state.limit
+);

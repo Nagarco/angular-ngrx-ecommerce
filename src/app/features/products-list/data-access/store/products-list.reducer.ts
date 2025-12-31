@@ -34,6 +34,5 @@ export const productsListReducer = createReducer(
   on(ProductsListActions.clearError, (state) => ({
     ...state,
     error: null,
-  }))
+  })),
 );
-

@@ -11,7 +11,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { API_BASE_URL, AuthInterceptor } from '@/core/api';
+import { API_BASE_URL, AuthInterceptor, ErrorInterceptor } from '@/core/api';
 import { environment } from '../enviornments/enviornment';
 import { appReducers, appEffects } from './store';
 
@@ -22,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(appReducers),
     provideEffects(appEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideHttpClient(withInterceptors([AuthInterceptor])),
+    provideHttpClient(withInterceptors([AuthInterceptor, ErrorInterceptor])),
     provideTranslateService({
       loader: provideTranslateHttpLoader({
         prefix: '/assets/i18n/',

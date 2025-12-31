@@ -1,3 +1,10 @@
 @for (product of products$ | async; track product.id) {
-    <app-product [product]="product"></app-product>
+<app-product [product]="product"></app-product>
 }
+<mat-paginator
+  [length]="(total$ | async) ?? 0"
+  [pageSize]="(pageSize$ | async) ?? 5"
+  [pageIndex]="(pageIndex$ | async) ?? 0"
+  [pageSizeOptions]="[5, 10, 25]"
+  (page)="onPageChange($event)">
+</mat-paginator>

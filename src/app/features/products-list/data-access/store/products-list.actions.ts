@@ -18,4 +18,3 @@ export const loadProductsFailure = createAction(
 );
 
 export const clearError = createAction('[Products List] Clear Error');
-

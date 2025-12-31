@@ -1,31 +1,35 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
 import { Product } from '../data-access';
 import { ProductComponent } from '../components';
-import * as ProductsListActions from '../data-access/store/products-list.actions';
-import * as ProductsListSelectors from '../data-access/store/products-list.selectors';
+import { ProductsListFacade } from '../data-access';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-products-list',
-  imports: [CommonModule, ProductComponent],
+  imports: [CommonModule, ProductComponent, MatPaginatorModule],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsListComponent implements OnInit {
-  private store = inject(Store);
-  products$: Observable<Product[]> = this.store.select(ProductsListSelectors.selectProducts);
-  isLoading$: Observable<boolean> = this.store.select(ProductsListSelectors.selectIsLoading);
-  error$: Observable<string | null> = this.store.select(ProductsListSelectors.selectError);
+  facade = inject(ProductsListFacade);
+
+  isLoading$: Observable<boolean> = this.facade.isLoading$;
+  error$: Observable<string | null> = this.facade.error$;
+  products$: Observable<Product[]> = this.facade.items$;
+  total$: Observable<number> = this.facade.total$;
+  pageSize$: Observable<number> = this.facade.pageSize$;
+  pageIndex$: Observable<number> = this.facade.pageIndex$;
 
   ngOnInit(): void {
-    this.store.dispatch(
-      ProductsListActions.loadProducts({
-        params: { page: 1, size: 5 },
-      })
-    );
+    this.facade.loadItems({ page: 1, size: 5 });
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.facade.onPageChange(event);
   }
 }
 
