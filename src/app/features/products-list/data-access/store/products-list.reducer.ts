@@ -9,8 +9,9 @@ export const productsListReducer = createReducer(
     ...state,
     isLoading: true,
     error: null,
-    currentPage: params.page,
-    limit: params.size,
+    currentPage: params.page || 1,
+    limit: params.size || 5,
+    filters: params || state.filters,
   })),
 
   on(ProductsListActions.loadProductsSuccess, (state, { data, params }) => ({
@@ -19,8 +20,8 @@ export const productsListReducer = createReducer(
     total: data.total,
     isLoading: false,
     error: null,
-    currentPage: params.page,
-    limit: params.size,
+    currentPage: params.page || 1,
+    limit: params.size || 5,
   })),
 
   on(ProductsListActions.loadProductsFailure, (state, { error }) => ({
@@ -34,5 +35,17 @@ export const productsListReducer = createReducer(
   on(ProductsListActions.clearError, (state) => ({
     ...state,
     error: null,
+  })),
+
+  
+
+  on(ProductsListActions.setFilters, (state, { filters }) => ({
+    ...state,
+    filters,
+  })),
+
+  on(ProductsListActions.clearFilters, (state) => ({
+    ...state,
+    filters: {},
   })),
 );

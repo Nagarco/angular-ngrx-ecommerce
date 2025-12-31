@@ -1,3 +1,5 @@
+<app-products-filter></app-products-filter>
+
 @for (product of products$ | async; track product.id) {
 <app-product-card [product]="product"></app-product-card>
 }

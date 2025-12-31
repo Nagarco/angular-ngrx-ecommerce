@@ -1,15 +1,7 @@
 <mat-card>
   <div class="item" [attr.aria-label]="'Product: ' + product().productName">
     <div class="item__avatar">
-      @if (product().imageUrl) {
       <lib-avatar [imageUrl]="product().imageUrl" [size]="'xxl'" [shape]="'square'" />
-      } @else {
-      <div
-        class="placeholder"
-        [attr.aria-label]="'Placeholder image for ' + product().productName"
-        role="img"
-      ></div>
-      }
     </div>
 
     <div class="item__details">

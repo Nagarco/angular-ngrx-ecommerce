@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { PagingParams } from '@/core/api';
+import { map, take } from 'rxjs/operators';
 import { BaseListFacade } from '../../../../core/facades';
 import { Product } from '../models';
+import { ProductsFilter } from '../interfaces';
 import * as ProductsListActions from '../store/products-list.actions';
 import * as ProductsListSelectors from '../store/products-list.selectors';
 import { PageEvent } from '@angular/material/paginator';
@@ -42,14 +42,34 @@ export class ProductsListFacade extends BaseListFacade<Product> {
     this.store.dispatch(ProductsListActions.clearError());
   }
 
-  loadItems(params: PagingParams): void {
+  filters$: Observable<ProductsFilter> = this.store.select(
+    ProductsListSelectors.selectFilters
+  );
+
+  loadItems(params: ProductsFilter): void {
     this.store.dispatch(ProductsListActions.loadProducts({ params }));
   }
 
   onPageChange(event: PageEvent): void {
     const page = event.pageIndex + 1;
     const size = event.pageSize;
-    this.loadItems({ page, size });
+    this.store.select(ProductsListSelectors.selectFilters).pipe(take(1)).subscribe(filters => {
+      this.loadItems({ ...filters, page, size });
+    });
+  }
+
+  applyFilters(filters: ProductsFilter): void {
+    this.store.dispatch(ProductsListActions.setFilters({ filters }));
+    this.store.select(ProductsListSelectors.selectLimit).pipe(take(1)).subscribe(limit => {
+      this.loadItems({ ...filters, page: 1, size: limit });
+    });
+  }
+
+  resetFilters(): void {
+    this.store.dispatch(ProductsListActions.clearFilters());
+    this.store.select(ProductsListSelectors.selectLimit).pipe(take(1)).subscribe(limit => {
+      this.loadItems({ page: 1, size: limit });
+    });
   }
 }
 

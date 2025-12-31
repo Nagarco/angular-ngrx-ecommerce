@@ -1,1 +1,1 @@
-export * from './products-list-payload.interface';
+export * from './products-filter.interface';

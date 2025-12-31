@@ -46,3 +46,8 @@ export const selectPageSize = createSelector(
   selectProductsListState,
   (state: ProductsListState) => state.limit
 );
+
+export const selectFilters = createSelector(
+  selectProductsListState,
+  (state: ProductsListState) => state.filters
+);

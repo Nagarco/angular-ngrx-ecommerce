@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 import { Product } from '../data-access';
-import { ProductCardComponent } from '../components';
+import { ProductCardComponent, ProductsFilterComponent } from '../components';
 import { ProductsListFacade } from '../data-access';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-products-list',
-  imports: [CommonModule, ProductCardComponent, MatPaginatorModule],
+  imports: [CommonModule, ProductCardComponent, ProductsFilterComponent, MatPaginatorModule],
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

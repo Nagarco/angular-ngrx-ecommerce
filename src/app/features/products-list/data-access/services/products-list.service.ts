@@ -1,8 +1,9 @@
 import { inject, Injectable } from "@angular/core";
 import { ProductsListRepository } from "../repository";
 import { Product } from "../models";
-import { List, PagingParams } from "@/core/api";
+import { List } from "@/core/api";
 import { Observable } from "rxjs";
+import { ProductsFilter } from "../interfaces";
 
 @Injectable({
     providedIn: 'root',
@@ -10,7 +11,7 @@ import { Observable } from "rxjs";
 export class ProductsListService {
     private productsListRepository = inject(ProductsListRepository);
 
-    getProducts(params: PagingParams): Observable<List<Product>> {
+    getProducts(params: ProductsFilter): Observable<List<Product>> {
         return this.productsListRepository.getProducts(params);
     }
 }
