@@ -3,9 +3,9 @@ import { inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import * as AuthActions from '@/store/auth';
-import { AuthEndPoints } from '../../endpoints';
 import { checkIfUrlExist } from '@/common';
+import * as AuthActions from '@/features/auth/data-access';
+import { AuthEndPoints } from '@/features/auth/data-access';
 
 const PUBLIC_URLS = [AuthEndPoints.Login.url()];
 

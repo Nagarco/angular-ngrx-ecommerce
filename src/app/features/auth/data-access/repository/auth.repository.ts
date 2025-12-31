@@ -1,5 +1,6 @@
 import { inject, Injectable } from "@angular/core";
-import { AuthEndPoints, HttpService } from "../api";
+import { AuthEndPoints } from "../endpoints";
+import { HttpService } from "@/core/api";
 import { map, Observable } from "rxjs";
 
 @Injectable({

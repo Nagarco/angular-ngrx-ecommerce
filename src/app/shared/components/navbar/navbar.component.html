@@ -2,13 +2,7 @@
   <nav aria-label="breadcrumb" class="navbar">
     <app-breadcrumb></app-breadcrumb>
     <div class="navbar__actions">
-      <app-cart [itemCount]="0"></app-cart>
-      <app-dropdown 
-        class="navbar__menu"
-        [label]="'User'" 
-        [options]="navbarOptions"
-        (selectionChange)="onDropdownChange($event)">
-      </app-dropdown>
+      <ng-container *ngTemplateOutlet="navItems()"></ng-container>
     </div>
   </nav>
 </mat-toolbar>

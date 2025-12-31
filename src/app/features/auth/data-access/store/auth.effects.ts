@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import * as AuthActions from './auth.actions';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../services';
 import { FeaturesRoutes } from '@/common';
 
 @Injectable()

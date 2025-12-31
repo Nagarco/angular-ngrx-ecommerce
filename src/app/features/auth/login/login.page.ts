@@ -14,8 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
-import * as AuthActions from '@/store/auth';
-import * as AuthSelectors from '@/store/auth';
+import * as AuthActions from '@/features/auth/data-access';
+import * as AuthSelectors from '@/features/auth/data-access/store';
 import { Observable } from 'rxjs';
 
 @Component({

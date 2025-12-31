@@ -5,6 +5,6 @@ export const AUTH_ROUTES: Route[] = [
   {
     path: FeaturesRoutes.Login.path,
     loadComponent: () =>
-      import('./feature-login/login/login.page').then((m) => m.LoginPage),
+      import('./login/login.page').then((m) => m.LoginPage),
   },
 ];

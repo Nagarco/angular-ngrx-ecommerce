@@ -1,9 +1,19 @@
 <div class="layout">
   <div class="layout__header" #header>
-    <app-navbar></app-navbar>
+    <app-navbar [navItems]="navItems"></app-navbar>
   </div>
   <div #spacer></div>
   <div class="layout__outlet">
     <router-outlet></router-outlet>
   </div>
 </div>
+
+<ng-template #navItems>
+  <app-cart [itemCount]="0"></app-cart>
+  <app-dropdown
+    class="menu"
+    [label]="'User'"
+    [options]="navbarOptions"
+    (selectionChange)="onDropdownChange($event)"
+  ></app-dropdown>
+</ng-template>

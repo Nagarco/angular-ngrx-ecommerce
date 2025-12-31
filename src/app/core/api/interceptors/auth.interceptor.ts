@@ -3,9 +3,9 @@ import { inject, InjectionToken } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
-import { AuthEndPoints } from '../../endpoints';
-import { selectToken } from '@/store/auth';
 import { checkIfUrlExist } from '@/common';
+import { AuthEndPoints } from '@/features/auth/data-access';
+import { selectToken } from '@/features/auth/data-access';
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
