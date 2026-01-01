@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
@@ -14,16 +14,15 @@ export class BreadcrumbComponent implements OnInit {
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef);
-  currentPage: string = '';
+  currentPage = signal<string>('');
 
   ngOnInit(): void {
-    this.currentPage = this.getCurrentPageName();
+    this.currentPage.set(this.getCurrentPageName());
     this.subscribeToRouteChanges();
   }
 
   private getCurrentPageName(): string {
     let route = this.activatedRoute;
-
     while (route.firstChild) {
       route = route.firstChild;
     }
@@ -39,7 +38,7 @@ export class BreadcrumbComponent implements OnInit {
       takeUntilDestroyed(this.destroyRef)
     )
     .subscribe(() => {
-      this.currentPage = this.getCurrentPageName();
+      this.currentPage.set(this.getCurrentPageName());
     });
   }
 }

@@ -11,11 +11,21 @@ export const routes: Routes = [
       import('./features/auth/routes').then((m) => m.AUTH_ROUTES),
   },
   {
-    path: FeaturesRoutes.Landing.path,
-    canActivate: [authGuard],
+    path: '',
     component: MainLayoutComponent,
-    loadChildren: () =>
-      import('./features/landing').then((m) => m.LANDING_ROUTES),
+    canActivate: [authGuard],
+    children: [
+      {
+        path: FeaturesRoutes.Landing.path,
+        loadChildren: () =>
+          import('./features/landing').then((m) => m.LANDING_ROUTES),
+      },
+      {
+        path: FeaturesRoutes.Cart.path,
+        loadChildren: () =>
+          import('./features/cart').then((m) => m.CART_ROUTES),
+      },
+    ],
   },
   {
     path: '',

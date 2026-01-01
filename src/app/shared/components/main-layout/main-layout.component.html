@@ -9,7 +9,7 @@
 </div>
 
 <ng-template #navItems>
-  <app-cart [itemCount]="0"></app-cart>
+  <app-cart [itemCount]="cartItemsCount()"></app-cart>
   <app-dropdown
     class="menu"
     [label]="'User'"

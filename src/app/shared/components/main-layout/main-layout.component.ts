@@ -4,35 +4,39 @@ import {
   effect,
   ElementRef,
   inject,
-  input,
-  TemplateRef,
   viewChild,
 } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { RouterOutlet } from '@angular/router';
-import { CartComponent } from '../cart-icon/cart.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
+import { CartIconComponent } from '@/features/cart/components';
 import * as AuthActions from '@/features/auth/data-access';
+import { CartFacade } from '@/features/cart/data-access';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [NavbarComponent, RouterOutlet, CartComponent, DropdownComponent],
+  imports: [NavbarComponent, RouterOutlet, CartIconComponent, DropdownComponent],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainLayoutComponent {
   private store = inject(Store);
+  private cartFacade = inject(CartFacade);
+  
   headerRef = viewChild<ElementRef>('header');
   spacerRef = viewChild<ElementRef>('spacer');
-   navbarOptions = [
-    {
-      label: 'Logout',
-      value: NavbarActions.LOGOUT
-    }
-  ];
-
+  
+  cartItemsCount = toSignal(this.cartFacade.itemsCount$, { initialValue: 0 });
+  
+  navbarOptions = [
+   {
+     label: 'Logout',
+     value: NavbarActions.LOGOUT
+   }
+ ];
 
   constructor() {
     effect(() => {

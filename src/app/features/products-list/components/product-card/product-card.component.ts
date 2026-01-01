@@ -1,9 +1,12 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Product } from '../../data-access';
 import { AvatarComponent } from '@/shared/components';
+import { CartFacade } from '@/features/cart/data-access';
+import { Store } from '@ngrx/store';
+import * as CartActions from '@/features/cart/data-access';
 
 @Component({
   selector: 'app-product-card',
@@ -13,11 +16,11 @@ import { AvatarComponent } from '@/shared/components';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductCardComponent {
+  private store = inject(Store);
   product = input.required<Product>();
-  addToCart = output<Product>();
 
   onAddToCart(): void {
-    this.addToCart.emit(this.product());
+    this.store.dispatch(CartActions.addToCart({ product: this.product() }));
   }
 }
 
