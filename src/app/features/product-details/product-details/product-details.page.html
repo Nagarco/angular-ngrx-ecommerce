@@ -1,1 +1,56 @@
-<p>product-details works!</p>
+@if (productDetails$ | async; as product) {
+<section class="container">
+  <div class="layout">
+    <div class="media">
+      <img
+        class="media__img"
+        [src]="product.imageUrl"
+        [alt]="product.productName"
+      />
+    </div>
+
+    <div class="content">
+      <h2 class="content__title">{{ product.productName }}</h2>
+      <p class="content__meta text-gray-600">Brand: {{ product.brandName }}</p>
+      <p class="fw-bold fs-3 m-0">${{ product.price.toFixed(2) }}</p>
+
+      <div>
+        <p class="text-gray-700 mb-2">Quantity</p>
+        <div class="actions">
+          <div class="counter">
+            <button
+              mat-icon-button
+              class="counter__btn"
+              (click)="decrementQuantity()"
+              [disabled]="quantity() === 1"
+            >
+              <mat-icon>remove</mat-icon>
+            </button>
+            <span class="counter__value">{{ quantity() }}</span>
+            <button
+              mat-icon-button
+              class="counter__btn"
+              (click)="incrementQuantity()"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+          <button
+            mat-flat-button
+            color="primary"
+            class="btn actions__btn"
+            (click)="onAddToCart()"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+      <div class="info">
+        <h4 class="info__title text-gray-700">Description</h4>
+        <p class="info__description text-gray-600">{{ product.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+}
