@@ -1,11 +1,11 @@
 <div class="layout">
-  <div class="layout__header" #header>
+  <header class="layout__header" #header>
     <app-navbar [navItems]="navItems"></app-navbar>
-  </div>
+  </header>
   <div #spacer></div>
-  <div class="layout__outlet">
+  <main class="layout__outlet">
     <router-outlet></router-outlet>
-  </div>
+  </main>
 </div>
 
 <ng-template #navItems>

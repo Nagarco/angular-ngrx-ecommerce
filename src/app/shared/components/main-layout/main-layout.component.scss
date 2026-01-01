@@ -5,6 +5,7 @@
 .layout__header {
   position: fixed;
   width: 100%;
+  z-index: 1000;
 }
 
 .layout__outlet {
@@ -15,6 +16,6 @@
   margin: 0;
   padding: 0;
   display: block;
-  background: #e2daff; //TODO:- to be changed to a variable
+  background: var(--color-white);
   border-radius: .5rem;
 }

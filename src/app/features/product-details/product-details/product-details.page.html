@@ -1,13 +1,13 @@
 @if (productDetails$ | async; as product) {
 <section class="container">
   <div class="layout">
-    <div class="media">
+    <figure class="media">
       <img
         class="media__img"
         [src]="product.imageUrl"
         [alt]="product.productName"
       />
-    </div>
+    </figure>
 
     <div class="content">
       <h2 class="content__title">{{ product.productName }}</h2>
@@ -23,6 +23,7 @@
               class="counter__btn"
               (click)="decrementQuantity()"
               [disabled]="quantity() === 1"
+              aria-label="Decrease quantity"
             >
               <mat-icon>remove</mat-icon>
             </button>
@@ -31,6 +32,7 @@
               mat-icon-button
               class="counter__btn"
               (click)="incrementQuantity()"
+              aria-label="Increase quantity"
             >
               <mat-icon>add</mat-icon>
             </button>
