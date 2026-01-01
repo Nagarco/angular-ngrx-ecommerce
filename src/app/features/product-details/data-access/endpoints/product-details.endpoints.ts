@@ -1,6 +1,5 @@
 import { RouteConfig } from "@/common";
 
-export class ProductsListEndPoints {
-    static GetProducts = new RouteConfig('products');
+export class ProductDetailsEndPoints {
     static GetProductDetails = new RouteConfig<{ id: string }>('products/:id');
 }

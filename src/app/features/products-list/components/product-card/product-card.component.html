@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card [routerLink]="FeaturesRoutes.ProductsView.url({ id: product().id })">
   <div class="item" [attr.aria-label]="'Product: ' + product().productName">
     <div class="item__avatar">
       <lib-avatar [imageUrl]="product().imageUrl" [size]="'xxl'" [shape]="'square'" />
@@ -18,7 +18,7 @@
         class="btn"
         color="primary"
         [attr.aria-label]="'Add ' + product().productName + ' to cart'"
-        (click)="onAddToCart()"
+        (click)="onAddToCart(); $event.stopPropagation()"
       >
         Add to Cart
       </button>

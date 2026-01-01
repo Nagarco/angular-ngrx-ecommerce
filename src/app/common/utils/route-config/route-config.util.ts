@@ -1,6 +1,10 @@
 export class RouteConfig<p = void, q = void> {
   public pathFromRoot: string;
 
+  get pathAfterRoot() {
+    return this.pathFromRoot.replace(/^\//, '')
+  }
+
   constructor(public path: string, public parent?: RouteConfig<any, any>) {
     this.pathFromRoot = RouteConfig.getPathUntilRoot(this);
   }

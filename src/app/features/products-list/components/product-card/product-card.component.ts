@@ -6,16 +6,19 @@ import { Product } from '../../data-access';
 import { AvatarComponent } from '@/shared/components';
 import { Store } from '@ngrx/store';
 import * as CartActions from '@/features/cart/data-access';
+import { RouterLink } from '@angular/router';
+import { FeaturesRoutes } from '@/common';
 
 @Component({
   selector: 'app-product-card',
-  imports: [CommonModule, MatButtonModule, MatCardModule, AvatarComponent],
+  imports: [CommonModule, MatButtonModule, MatCardModule, AvatarComponent, RouterLink],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductCardComponent {
   private store = inject(Store);
+  protected readonly FeaturesRoutes = FeaturesRoutes;
   product = input.required<Product>();
 
   onAddToCart(): void {

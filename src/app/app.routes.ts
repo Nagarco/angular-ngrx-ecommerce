@@ -25,6 +25,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/cart').then((m) => m.CART_ROUTES),
       },
+      {
+        path: FeaturesRoutes.ProductsView.pathAfterRoot,
+        loadChildren: () =>
+          import('./features/product-details').then((m) => m.PRODUCT_DETAILS_ROUTES),
+      }
     ],
   },
   {
