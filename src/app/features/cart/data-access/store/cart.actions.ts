@@ -35,3 +35,5 @@ export const saveCartFailure = createAction(
   '[Cart] Save Cart Failure',
   props<{ error: string }>()
 );
+
+export const clearCart = createAction('[Cart] Clear Cart');

@@ -1,1 +1,39 @@
-<p>cart works!</p>
+<div class="container">
+  @if (items$ | async; as items) {
+    @if (items.length) {
+      <app-cart-table
+        class="table"
+        [items]="items"
+        (incrementQuantity)="onIncrement($event)"
+        (decrementQuantity)="onDecrement($event)"
+        (removeItem)="onRemove($event)"
+      />
+
+      <div class="panel bg-gray-50">
+        <div class="panel__body">
+          <div class="panel__row">
+            <span class="text-gray-600" style="font-size: 0.875rem;">Items: {{ itemsCount$ | async }}</span>
+          </div>
+          <div class="panel__row">
+            <span>Subtotal:</span>
+            <span class="fw-bold">${{ (total$ | async)?.toFixed(2) }}</span>
+          </div>
+        </div>
+
+        <div class="panel__actions">
+          <button mat-stroked-button class="btn" (click)="onClearCart()">
+            Clear Cart
+          </button>
+          <button mat-flat-button class="btn" disabled>
+            Proceed
+          </button>
+        </div>
+      </div>
+    } @else {
+      <div class="empty">
+        <mat-icon class="empty__icon text-gray-300">shopping_cart</mat-icon>
+        <p class="empty__text text-gray-600">Your cart is empty</p>
+      </div>
+    }
+  }
+</div>

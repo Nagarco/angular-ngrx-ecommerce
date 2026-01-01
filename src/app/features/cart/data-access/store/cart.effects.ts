@@ -29,6 +29,7 @@ export class CartEffects {
         CartActions.addToCart, 
         CartActions.removeFromCart,
         CartActions.decrementQuantity,
+        CartActions.clearCart,
       ),
       withLatestFrom(this.store.select(CartSelectors.selectCartItems)),
       switchMap(([action, items]) => {

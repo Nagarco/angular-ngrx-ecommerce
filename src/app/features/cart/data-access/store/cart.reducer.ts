@@ -72,5 +72,12 @@ export const cartReducer = createReducer(
   on(CartActions.saveCartSuccess, (state) => ({
     ...state,
     error: null,
+  })),
+
+  on(CartActions.clearCart, (state) => ({
+    ...state,
+    items: [],
+    error: null,
   }))
 );
+

@@ -1,0 +1,70 @@
+<table class="table">
+  <thead class="table__header bg-gray-50">
+    <tr>
+      <th class="table__col">Product</th>
+      <th class="table__col">Price</th>
+      <th class="table__col">Qty</th>
+      <th class="table__col">Line Total</th>
+      <th class="table__col">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody class="table__body">
+    @for (item of items(); track item.product.id) {
+      <tr class="table__row">
+        <td class=" --product">
+          <div class="media">
+            <lib-avatar
+              class="media__img"
+              [imageUrl]="item.product.imageUrl"
+              [shape]="'square'"
+              [size]="'lg'"
+            />
+            <div class="media__content">
+              <div class="text">{{ item.product.productName }}</div>
+              <div class="text text-gray-600">{{ item.product.brandName }} - {{ item.product.description }}</div>
+            </div>
+          </div>
+        </td>
+
+        <td>
+          <span class="text">${{ item.product.price.toFixed(2) }}</span>
+        </td>
+
+        <td>
+          <div class="stepper bg-gray-50">
+            <button
+              mat-icon-button
+              (click)="onDecrement(item.product.id)"
+              [attr.aria-label]="'Decrease quantity'"
+            >
+              <mat-icon>remove</mat-icon>
+            </button>
+            <span>{{ item.quantity }}</span>
+            <button
+              mat-icon-button
+              (click)="onIncrement(item)"
+              [attr.aria-label]="'Increase quantity'"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </td>
+
+        <td>
+          <span>${{ getLineTotal(item).toFixed(2) }}</span>
+        </td>
+
+        <td>
+          <button
+            mat-stroked-button
+            class="btn"
+            (click)="onRemove(item.product.id)"
+          >
+            Remove
+          </button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
