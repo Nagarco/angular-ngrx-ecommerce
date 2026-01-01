@@ -4,7 +4,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Product } from '../../data-access';
 import { AvatarComponent } from '@/shared/components';
-import { CartFacade } from '@/features/cart/data-access';
 import { Store } from '@ngrx/store';
 import * as CartActions from '@/features/cart/data-access';
 

@@ -13,7 +13,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { Store } from '@ngrx/store';
 import { CartIconComponent } from '@/features/cart/components';
 import * as AuthActions from '@/features/auth/data-access';
-import { CartFacade } from '@/features/cart/data-access';
+import * as CartSelectors from '@/features/cart/data-access';
 
 @Component({
   selector: 'app-main-layout',
@@ -24,12 +24,11 @@ import { CartFacade } from '@/features/cart/data-access';
 })
 export class MainLayoutComponent {
   private store = inject(Store);
-  private cartFacade = inject(CartFacade);
-  
+
   headerRef = viewChild<ElementRef>('header');
   spacerRef = viewChild<ElementRef>('spacer');
   
-  cartItemsCount = toSignal(this.cartFacade.itemsCount$, { initialValue: 0 });
+  cartItemsCount = toSignal(this.store.select(CartSelectors.selectCartItemsCount), { initialValue: 0 });
   
   navbarOptions = [
    {

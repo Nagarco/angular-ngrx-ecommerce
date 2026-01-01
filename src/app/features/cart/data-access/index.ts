@@ -1,4 +1,3 @@
-export * from './facades/cart.facade';
 export * from './models';
 export * from './store/cart.actions';
 export * from './store/cart.reducer';

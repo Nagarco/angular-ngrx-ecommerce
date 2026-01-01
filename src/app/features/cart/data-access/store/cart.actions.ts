@@ -12,6 +12,12 @@ export const removeFromCart = createAction(
   props<{ productId: string }>()
 );
 
+export const decrementQuantity = createAction(
+  '[Cart] Decrement Quantity',
+  props<{ productId: string }>()
+);
+
+
 export const loadCart = createAction('[Cart] Load Cart');
 
 
