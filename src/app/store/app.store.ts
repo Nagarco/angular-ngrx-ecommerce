@@ -14,13 +14,13 @@ import { CartEffects } from '@/features/cart/data-access';
 
 export interface AppState {
   auth: AuthState;
-  productsList: ProductsListState;
+  products: ProductsListState;
   cart: CartState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
   auth: authReducer,
-  productsList: productsListReducer,
+  products: productsListReducer,
   cart: cartReducer,
 };
 

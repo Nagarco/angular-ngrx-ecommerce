@@ -2,7 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ProductsListState } from './products-list.state';
 
 export const selectProductsListState =
-  createFeatureSelector<ProductsListState>('productsList');
+  createFeatureSelector<ProductsListState>('products');
 
 export const selectProducts = createSelector(
   selectProductsListState,
