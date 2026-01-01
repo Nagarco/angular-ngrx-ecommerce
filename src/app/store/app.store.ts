@@ -12,7 +12,6 @@ import { AuthEffects } from '@/features/auth/data-access';
 import { ProductsListEffects } from '@/features/products-list/data-access';
 import { CartEffects } from '@/features/cart/data-access';
 
-
 export interface AppState {
   auth: AuthState;
   productsList: ProductsListState;

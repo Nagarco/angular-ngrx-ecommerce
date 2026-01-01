@@ -13,7 +13,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { API_BASE_URL, AuthInterceptor, ErrorInterceptor } from '@/core/api';
 import { environment } from '../enviornments/enviornment';
-import { appReducers, appEffects } from './store';
+import { appReducers, appEffects } from './store/app.store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
